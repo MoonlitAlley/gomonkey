@@ -1,10 +1,10 @@
 package fake
 
 import (
-    "fmt"
-    "strings"
     "errors"
+    "fmt"
     "os/exec"
+    "strings"
 )
 
 var (
@@ -127,3 +127,29 @@ func NewDb(style string) Db {
     }
 }
 
+type PrivateMethodStruct struct {
+
+}
+
+func (this *PrivateMethodStruct) ok() bool {
+    return this != nil
+}
+
+func (this *PrivateMethodStruct) Happy() string {
+    if this.ok() {
+        return "happy"
+    }
+    return "unhappy"
+}
+
+func (this PrivateMethodStruct) haveEaten() bool {
+    return this != PrivateMethodStruct{}
+}
+
+func (this PrivateMethodStruct) AreYouHungry() string {
+    if this.haveEaten() {
+        return "I am full"
+    }
+
+    return "I am hungry"
+}
